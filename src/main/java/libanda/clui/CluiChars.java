@@ -3,16 +3,20 @@ package libanda.clui;
 public class CluiChars {
 
 	public static CluiChars getAsciiCharSet(){
-		return null;
+		CluiChars asciiCharSet = new CluiChars();
+		return asciiCharSet;
 	}
 	public static CluiChars getSimpleUnicodeCharSet(){
-		return null;
+		CluiChars simpleUnicodeCharSet = new CluiChars();
+		return simpleUnicodeCharSet;
 	}
 	public static CluiChars getDuplexUnicodeCharSet(){
-		return null;
+		CluiChars duplexUnicodeCharSet = new CluiChars();
+		return duplexUnicodeCharSet;
 	}
 	public static CluiChars getMixedUnicodeCharSet(){
-		return null;
+		CluiChars mixedUnicodeCharSet = new CluiChars();
+		return mixedUnicodeCharSet;
 	}
 	
 	public CluiChars() {
