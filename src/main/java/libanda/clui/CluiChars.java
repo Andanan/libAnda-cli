@@ -20,7 +20,7 @@ public class CluiChars {
 	public static final int INNER_VERTICAL = 12;
 	public static final int SPACE = 13;
 	
-	private Map<Integer, Character> charSet;
+	private Map<Integer, Character> charMap;
 	
 	private static final char AS_PLUS = '+';
 	private static final char AS_MINUS = '-';
@@ -141,17 +141,20 @@ public class CluiChars {
 	}
 	
 	public CluiChars() {
-		this.charSet = new HashMap<>();
+		this.charMap = new HashMap<>();
 	}
 	public CluiChars(CluiChars template) {
-		this.charSet = new HashMap<>(template.charSet);
+		this.charMap = new HashMap<>(template.charMap);
 	}
 	public char get(int key){
-		Character c = this.charSet.get(key);
+		Character c = this.charMap.get(key);
 		return (c == null) ? '\0' : c;
 	}
 	public void set(int key, char val) {
-		this.charSet.put(key, val);
+		this.charMap.put(key, val);
+	}
+	public Map<Integer, Character> getCharMap() {
+		return new HashMap<>(this.charMap);
 	}
 	/**
 	 * @see java.lang.Object#hashCode()
@@ -160,7 +163,7 @@ public class CluiChars {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((charSet == null) ? 0 : charSet.hashCode());
+		result = prime * result + ((charMap == null) ? 0 : charMap.hashCode());
 		return result;
 	}
 	/**
@@ -175,10 +178,10 @@ public class CluiChars {
 		if (getClass() != obj.getClass())
 			return false;
 		CluiChars other = (CluiChars) obj;
-		if (charSet == null) {
-			if (other.charSet != null)
+		if (charMap == null) {
+			if (other.charMap != null)
 				return false;
-		} else if (!charSet.equals(other.charSet))
+		} else if (!charMap.equals(other.charMap))
 			return false;
 		return true;
 	}
@@ -187,7 +190,7 @@ public class CluiChars {
 	 */
 	@Override
 	public String toString() {
-		return "CluiChars [charSet=" + charSet + "]";
+		return "CluiChars [charSet=" + charMap + "]";
 	}
 	
 }
