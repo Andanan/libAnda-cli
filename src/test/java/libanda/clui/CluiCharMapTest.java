@@ -4,6 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CluiCharMapTest {
 	
 	/* Predefined charsets */
@@ -153,36 +156,79 @@ public class CluiCharMapTest {
 	}
 	
 	@Test
-	public void CluiChars_SetGet_Test() {
-		int key = 1, key2 = -4, key3 = 0;
-		char val = 'a', val2 = 'b', val3 = 'c';
-		CluiCharMap chars = new CluiCharMap();
+	public void getCharMapTest() {
+		int key1 = 0;
+		int key2 = 1;
+		char val1 = 'a';
+		char val2 = 'b';
+		Map<Integer, Character> refMap = new HashMap<>();
+		refMap.put(key1, val1);
+		refMap.put(key2, val2);
 		
-		chars.set(key, val);
-		assertEquals(val, chars.get(key));
-		assertNotEquals(val, chars.get(val2));
-		assertNotEquals(val, chars.get(val3));
-		
-		chars.set(key2, val2);
-		assertEquals(val2, chars.get(key2));
-		assertNotEquals(val2, chars.get(val));
-		assertNotEquals(val2, chars.get(val3));
-		
-		chars.set(key3, val3);
-		assertEquals(val3, chars.get(key3));
-		assertNotEquals(val3, chars.get(val2));
-		assertNotEquals(val3, chars.get(val));
+		CluiCharMap cluiCharMap = new CluiCharMap() {
+			{
+				this.charMap = new HashMap<>();
+				this.charMap.put(key1, val1);
+				this.charMap.put(key2, val2);
+			}
+		};
+		assertEquals(refMap, cluiCharMap.getCharMap());
 	}
 	
 	@Test
-	public void CluiChars_Consturctor_Test() {
-		// TODO: implement equals function
-		assertTrue(false);
+	public void setTest() {
+		int key1 = 1, key2 = -4, key3 = 0;
+		char val1 = 'a', val2 = 'b', val3 = 'c';
+		CluiCharMap ccm = new CluiCharMap();
+		
+		// ensure values are not present before
+		assertTrue(ccm.getCharMap().isEmpty());
+		
+		ccm.set(key1, val1);
+		ccm.set(key2, val2);
+		ccm.set(key3, val3);
+		
+		// validate set values
+		Map<Integer, Character> charMap = ccm.charMap;
+		assertEquals(val1, (char) charMap.get(key1));
+		assertEquals(val2, (char) charMap.get(key2));
+		assertEquals(val3, (char) charMap.get(key3));
 	}
 	
 	@Test
-	public void CluiChars_2param_Consturctor_Test() {
-		// TODO: implement equals function
-		assertTrue(false);
+	public void getTest() {
+		int key1 = 1, key2 = -4, key3 = 0;
+		char val1 = 'a', val2 = 'b', val3 = 'c';
+		CluiCharMap ccm = new CluiCharMap() {
+			{
+				this.charMap = new HashMap<>();
+				this.charMap.put(key1, val1);
+				this.charMap.put(key2, val2);
+				this.charMap.put(key3, val3);
+			}
+		};
+		assertEquals(val1, ccm.get(key1));
+		assertEquals(val2, ccm.get(key2));
+		assertEquals(val3, ccm.get(key3));
+	}
+	
+	@Test
+	public void consturctorTest() {
+		CluiCharMap ccm = new CluiCharMap();
+		assertEquals(new HashMap<Integer, Character>(), ccm.getCharMap());
+		assertTrue(ccm.getCharMap().isEmpty());
+	}
+	
+	@Test
+	public void _2paramConsturctorTest() {
+		CluiCharMap ccm1 = CluiCharMap.getAsciiCharSet();
+		CluiCharMap ccm2 = new CluiCharMap();
+		CluiCharMap ccm3 = new CluiCharMap(null);
+		CluiCharMap ccm12 = new CluiCharMap(ccm1);
+		CluiCharMap ccm22 = new CluiCharMap(ccm2);
+
+		assertEquals(ccm1.charMap, ccm12.charMap);
+		assertEquals(ccm2.charMap, ccm22.charMap);
+		assertEquals(ccm2.charMap, ccm3.charMap);
 	}
 }
