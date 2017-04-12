@@ -20,7 +20,7 @@ public class CluiCharMap {
 	public static final int INNER_VERTICAL = 12;
 	public static final int SPACE = 13;
 	
-	private Map<Integer, Character> charMap;
+	protected Map<Integer, Character> charMap;
 	
 	private static final char AS_PLUS = '+';
 	private static final char AS_MINUS = '-';
@@ -144,7 +144,8 @@ public class CluiCharMap {
 		this.charMap = new HashMap<>();
 	}
 	public CluiCharMap(CluiCharMap template) {
-		this.charMap = new HashMap<>(template.charMap);
+		Map<Integer, Character> charMap = (null == template) ? new HashMap<>() : template.charMap;
+		this.charMap = new HashMap<>(charMap);
 	}
 	public char get(int key){
 		Character c = this.charMap.get(key);
