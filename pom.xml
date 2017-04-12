@@ -4,7 +4,7 @@
 
   <groupId>libAnda</groupId>
   <artifactId>libAnda-clui</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2-PRE</version>
   <packaging>jar</packaging>
 
   <name>libAnda-clui</name>
