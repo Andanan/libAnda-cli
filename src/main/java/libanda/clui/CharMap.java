@@ -3,7 +3,7 @@ package libanda.clui;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CluiCharMap {
+public class CharMap {
 	
 	public static final int TOP_LEFT_CORNER = 0;
 	public static final int TOP_CENTER = 1;
@@ -67,8 +67,8 @@ public class CluiCharMap {
 	private static final char MU_INNER_VERTICAL = SU_INNER_VERTICAL;
 	
 
-	public static CluiCharMap getAsciiCharSet(){
-		CluiCharMap asciiCharSet = new CluiCharMap();
+	public static CharMap getAsciiCharSet(){
+		CharMap asciiCharSet = new CharMap();
 		asciiCharSet.set(TOP_LEFT_CORNER, AS_PLUS);
 		asciiCharSet.set(TOP_CENTER, AS_PLUS);
 		asciiCharSet.set(TOP_RIGHT_CORNER, AS_PLUS);
@@ -85,8 +85,8 @@ public class CluiCharMap {
 		asciiCharSet.set(SPACE, AS_SPACE);
 		return asciiCharSet;
 	}
-	public static CluiCharMap getSimpleUnicodeCharSet(){
-		CluiCharMap simpleUnicodeCharSet = new CluiCharMap();
+	public static CharMap getSimpleUnicodeCharSet(){
+		CharMap simpleUnicodeCharSet = new CharMap();
 		simpleUnicodeCharSet.set(TOP_LEFT_CORNER, SU_TOP_LEFT_CORNER);
 		simpleUnicodeCharSet.set(TOP_CENTER, SU_TOP_CENTER);
 		simpleUnicodeCharSet.set(TOP_RIGHT_CORNER, SU_TOP_RIGHT_CORNER);
@@ -103,8 +103,8 @@ public class CluiCharMap {
 		simpleUnicodeCharSet.set(SPACE, AS_SPACE);
 		return simpleUnicodeCharSet;
 	}
-	public static CluiCharMap getDuplexUnicodeCharSet(){
-		CluiCharMap duplexUnicodeCharSet = new CluiCharMap();
+	public static CharMap getDuplexUnicodeCharSet(){
+		CharMap duplexUnicodeCharSet = new CharMap();
 		duplexUnicodeCharSet.set(TOP_LEFT_CORNER, DU_TOP_LEFT_CORNER);
 		duplexUnicodeCharSet.set(TOP_CENTER, DU_TOP_CENTER);
 		duplexUnicodeCharSet.set(TOP_RIGHT_CORNER, DU_TOP_RIGHT_CORNER);
@@ -121,8 +121,8 @@ public class CluiCharMap {
 		duplexUnicodeCharSet.set(SPACE, AS_SPACE);
 		return duplexUnicodeCharSet;
 	}
-	public static CluiCharMap getMixedUnicodeCharSet(){
-		CluiCharMap mixedUnicodeCharSet = new CluiCharMap();
+	public static CharMap getMixedUnicodeCharSet(){
+		CharMap mixedUnicodeCharSet = new CharMap();
 		mixedUnicodeCharSet.set(TOP_LEFT_CORNER, MU_TOP_LEFT_CORNER);
 		mixedUnicodeCharSet.set(TOP_CENTER, MU_TOP_CENTER);
 		mixedUnicodeCharSet.set(TOP_RIGHT_CORNER, MU_TOP_RIGHT_CORNER);
@@ -140,10 +140,10 @@ public class CluiCharMap {
 		return mixedUnicodeCharSet;
 	}
 	
-	public CluiCharMap() {
+	public CharMap() {
 		this.charMap = new HashMap<>();
 	}
-	public CluiCharMap(CluiCharMap template) {
+	public CharMap(CharMap template) {
 		Map<Integer, Character> charMap = (null == template) ? new HashMap<>() : template.charMap;
 		this.charMap = new HashMap<>(charMap);
 	}
@@ -178,7 +178,7 @@ public class CluiCharMap {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CluiCharMap other = (CluiCharMap) obj;
+		CharMap other = (CharMap) obj;
 		if (charMap == null) {
 			if (other.charMap != null)
 				return false;
