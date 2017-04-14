@@ -1,3 +1,5 @@
+[<< Back to main](./)
+
 # Changelog
 
 ## Next Release: 0.0.2 (2017-04)
