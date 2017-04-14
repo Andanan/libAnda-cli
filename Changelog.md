@@ -3,10 +3,13 @@
 ## Next Release: 0.0.2 (2017-04)
 ### Added:
 * [NOTHING]
+
 ### Updated:
 * Renamed CluiCharMap and CluiCharMapTest to CharMap and CharMapTest
+
 ### Removed:
 * [NOTHING]
+
 
 ## Release: 0.0.1-SNAPSHOT (2017-04-12)
 ### Added:
@@ -16,6 +19,7 @@
     - PaddingPosition
 * Tests:
     - CluiCharMapTest
+
 ### Updated:
 * Renamed project from libAnda-cli to libAnda-clui
 * Moved to jUnit v4.12
