@@ -1,15 +1,9 @@
 # libAnda-cli
 
-libAnda is a collection of useful Java-classes as used by Andanan in his projects.
-The cli package is a collection of helper classes for creating command line interfaces.
+The libAnda project is intended as a collection of useful Java-classes.
+The clui sub-project in particular is a collection of helper classes for creating command line user interfaces.
 
-[Documentation](https://andanan.github.io/libAnda-cli/)
-
-### Some contained Classes:
-* **LoremIpsum**  
-  Contains...
-* **DolorSitAmet**  
-  An extension to...
+[Project-Site](https://andanan.github.io/libAnda-clui/) (GitHub-Pages)
 
 ### Dependencies
-* Lorem
+* jUnit 4.12
