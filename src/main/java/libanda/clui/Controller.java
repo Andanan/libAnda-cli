@@ -2,6 +2,18 @@ package libanda.clui;
 
 public class Controller {
 
+	public static final int MIN_WIDTH = 10;
+	public static final int MIN_PADDING = 0;
+
+	private static final CharMap DEFAULT_CHAR_MAP = CharMap.getAsciiCharSet();
+	private static final int DEFAULT_PADDING = 1;
+	private static final int DEFAULT_WIDTH = 80;
+
+	private CharMap charMap;
+	private int paddingLeft;
+	private int paddingRight;
+	private int width;
+
 	/**
 	 * Intended behavior:<br />
 	 * Create new instance of Controller with default values for width,
@@ -9,7 +21,9 @@ public class Controller {
 	 * constants
 	 */
 	public Controller() {
-
+		setCharMap(DEFAULT_CHAR_MAP);
+		setPadding(PaddingPosition.BOTH, DEFAULT_PADDING);
+		setWidth(DEFAULT_WIDTH);
 	}
 
 	/**
@@ -24,7 +38,9 @@ public class Controller {
 	 *             If the passed CharMap is null
 	 */
 	public Controller(CharMap charMap) throws NullPointerException {
-
+		setCharMap(charMap);
+		setPadding(PaddingPosition.BOTH, DEFAULT_PADDING);
+		setWidth(DEFAULT_WIDTH);
 	}
 
 	/**
@@ -38,7 +54,9 @@ public class Controller {
 	 *            - The width which will be used to draw all components.
 	 */
 	public Controller(int width) {
-
+		setCharMap(DEFAULT_CHAR_MAP);
+		setPadding(PaddingPosition.BOTH, DEFAULT_PADDING);
+		setWidth(width);
 	}
 
 	/**
@@ -56,7 +74,9 @@ public class Controller {
 	 *             If the passed CharMap is null
 	 */
 	public Controller(CharMap charMap, int width) throws NullPointerException {
-
+		setCharMap(charMap);
+		setPadding(PaddingPosition.BOTH, DEFAULT_PADDING);
+		setWidth(width);
 	}
 
 	/**
@@ -68,7 +88,9 @@ public class Controller {
 	 *            - The width which will be used to draw all components.
 	 */
 	public void setWidth(int width) {
-
+		if (width < MIN_WIDTH)
+			width = MIN_WIDTH;
+		this.width = width;
 	}
 
 	/**
@@ -78,7 +100,7 @@ public class Controller {
 	 * @return The width which will be used to draw all components
 	 */
 	public int getWidth() {
-		return 0;
+		return this.width;
 	}
 
 	/**
@@ -91,7 +113,9 @@ public class Controller {
 	 *             If the passed CharMap is null
 	 */
 	public void setCharMap(CharMap charMap) throws NullPointerException {
-
+		if (charMap == null)
+			throw new NullPointerException("CharMap is null");
+		this.charMap = charMap;
 	}
 
 	/**
@@ -101,7 +125,7 @@ public class Controller {
 	 * @return The CharMap which will be used to draw all components.
 	 */
 	public CharMap getCharMap() {
-		return new CharMap();
+		return this.charMap;
 	}
 
 	/**
@@ -117,7 +141,14 @@ public class Controller {
 	 *             If the passed PaddingPosition is null
 	 */
 	public void setPadding(PaddingPosition position, int width) throws NullPointerException {
-
+		if (width < MIN_PADDING)
+			width = MIN_PADDING;
+		if (position == PaddingPosition.LEFT || position == PaddingPosition.BOTH) {
+			this.paddingLeft = width;
+		}
+		if (position == PaddingPosition.RIGHT || position == PaddingPosition.BOTH) {
+			this.paddingRight = width;
+		}
 	}
 
 	/**
@@ -127,7 +158,7 @@ public class Controller {
 	 * @return The padding on the right which is used to draw all components.
 	 */
 	public int getPaddingRight() {
-		return -1;
+		return this.paddingRight;
 	}
 
 	/**
@@ -137,7 +168,7 @@ public class Controller {
 	 * @return The padding on the left which is used to draw all components.
 	 */
 	public int getPaddingLeft() {
-		return -1;
+		return this.paddingLeft;
 	}
 
 	/**
@@ -152,7 +183,7 @@ public class Controller {
 	 *             If the passed PaddingPosition is null
 	 */
 	public void clearPadding(PaddingPosition position) throws NullPointerException {
-
+		setPadding(PaddingPosition.BOTH, 0);
 	}
 
 }
