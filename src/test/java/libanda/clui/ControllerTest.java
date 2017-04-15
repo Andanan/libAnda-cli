@@ -32,125 +32,80 @@ public class ControllerTest {
 
 	@Test
 	public void ConstructorCharMapTest() {
-		// CharMap 1 -> Default CharMap
-		charMap = DEFAULT_CHAR_MAP;
-		ctrl = new Controller(charMap);
-		assertEquals(charMap, ctrl.getCharMap());
-		assertEquals(DEFAULT_WIDTH, ctrl.getWidth());
-		assertEquals(DEFAULT_PADDING_LEFT, ctrl.getPaddingLeft());
-		assertEquals(DEFAULT_PADDING_RIGHT, ctrl.getPaddingRight());
-
-		// CharMap 2
-		charMap = CharMap.getSimpleUnicodeCharSet();
-		ctrl = new Controller(charMap);
-		assertEquals(charMap, ctrl.getCharMap());
-		assertEquals(DEFAULT_WIDTH, ctrl.getWidth());
-		assertEquals(DEFAULT_PADDING_LEFT, ctrl.getPaddingLeft());
-		assertEquals(DEFAULT_PADDING_RIGHT, ctrl.getPaddingRight());
-
-		// null
-		charMap = null;
-		boolean npeCatched = false;
-		try {
-			ctrl = new Controller(charMap);
-		} catch (NullPointerException e) {
-			npeCatched = true;
+		CharMap[] charMaps = { CharMap.getAsciiCharSet(), CharMap.getSimpleUnicodeCharSet(),
+				CharMap.getDuplexUnicodeCharSet(), CharMap.getMixedUnicodeCharSet(), null };
+		for (CharMap charMap : charMaps) {
+			// if charMap is null: test if NullPointerException is thrown on
+			// instantiation of Controller
+			if (charMap == null) {
+				boolean npeCatched = false;
+				try {
+					ctrl = new Controller(charMap);
+				} catch (NullPointerException e) {
+					npeCatched = true;
+				}
+				assertTrue(npeCatched);
+			} else {
+				// If charMap is not null: test if values are set correctly
+				ctrl = new Controller(charMap);
+				assertEquals(charMap, ctrl.getCharMap());
+				assertEquals(DEFAULT_PADDING_LEFT, ctrl.getPaddingLeft());
+				assertEquals(DEFAULT_PADDING_RIGHT, ctrl.getPaddingRight());
+				assertEquals(DEFAULT_WIDTH, ctrl.getWidth());
+			}
 		}
-		assertTrue(npeCatched);
 	}
 
 	@Test
 	public void ConstructorWidthTest() {
-		int width;
-		// width: default, expect: default
-		width = DEFAULT_WIDTH;
-		ctrl = new Controller(width);
-		assertEquals(DEFAULT_CHAR_MAP, ctrl.getCharMap());
-		assertEquals(width, ctrl.getWidth());
-		assertEquals(DEFAULT_PADDING_LEFT, ctrl.getPaddingLeft());
-		assertEquals(DEFAULT_PADDING_RIGHT, ctrl.getPaddingRight());
-
-		// width: 55, expect: 55
-		width = 55;
-		ctrl = new Controller(width);
-		assertEquals(DEFAULT_CHAR_MAP, ctrl.getCharMap());
-		assertEquals(width, ctrl.getWidth());
-		assertEquals(DEFAULT_PADDING_LEFT, ctrl.getPaddingLeft());
-		assertEquals(DEFAULT_PADDING_RIGHT, ctrl.getPaddingRight());
-
-		// width: 10, expect: 10
-		width = 10;
-		int expected = 10;
-		ctrl = new Controller(width);
-		assertEquals(DEFAULT_CHAR_MAP, ctrl.getCharMap());
-		assertEquals(expected, ctrl.getWidth());
-		assertEquals(DEFAULT_PADDING_LEFT, ctrl.getPaddingLeft());
-		assertEquals(DEFAULT_PADDING_RIGHT, ctrl.getPaddingRight());
-
-		// width: -1, expect: 10
-		width = -1;
-		expected = 10;
-		ctrl = new Controller(width);
-		assertEquals(DEFAULT_CHAR_MAP, ctrl.getCharMap());
-		assertEquals(expected, ctrl.getWidth());
-		assertEquals(DEFAULT_PADDING_LEFT, ctrl.getPaddingLeft());
-		assertEquals(DEFAULT_PADDING_RIGHT, ctrl.getPaddingRight());
-
-		// width: 9, expect: 10
-		width = 9;
-		expected = 10;
-		ctrl = new Controller(width);
-		assertEquals(DEFAULT_CHAR_MAP, ctrl.getCharMap());
-		assertEquals(expected, ctrl.getWidth());
-		assertEquals(DEFAULT_PADDING_LEFT, ctrl.getPaddingLeft());
-		assertEquals(DEFAULT_PADDING_RIGHT, ctrl.getPaddingRight());
+		int[] testWidths = { Integer.MIN_VALUE, -10, 1, 0, 1, 10, 50, 55, Integer.MAX_VALUE };
+		for (int testWidth : testWidths) {
+			ctrl = new Controller(testWidth);
+			assertEquals(DEFAULT_CHAR_MAP, ctrl.getCharMap());
+			assertEquals(DEFAULT_PADDING_LEFT, ctrl.getPaddingLeft());
+			assertEquals(DEFAULT_PADDING_RIGHT, ctrl.getPaddingRight());
+			if (testWidth <= Controller.MIN_WIDTH) {
+				assertEquals(Controller.MIN_WIDTH, ctrl.getWidth());
+			} else {
+				assertEquals(testWidth, ctrl.getWidth());
+			}
+		}
 	}
 
 	@Test
 	public void ConstructorCharMapWidthTest() {
-		// Map1, >10_1; expected: Map1, >10_1
-		// Map1, >10_2; expected: Map1, >10_2
-		// Map1, =10; expected: Map1, 10
-		// Map1, <10_1; expected: Map1, 10
-		// Map1, <10_2; expected: Map1, 10
-		charMap = CharMap.getAsciiCharSet();
-		for (int i = Integer.MIN_VALUE; i <= Integer.MAX_VALUE; i++) {
-			ctrl = new Controller(charMap, i);
-			if (i < 10) {
-				assertEquals(i, ctrl.getWidth());
-				assertEquals(charMap, ctrl.getCharMap());
-			}
-		}
+		CharMap[] charMaps = { CharMap.getAsciiCharSet(), CharMap.getSimpleUnicodeCharSet(),
+				CharMap.getDuplexUnicodeCharSet(), CharMap.getMixedUnicodeCharSet(), null };
+		int[] testValues = { Integer.MIN_VALUE, -10, -1, 0, 1, 9, 10, 30, Integer.MAX_VALUE };
+		boolean npeCatched;
 
-		// Map2, >10_1; expected: Map2, >10_1
-		// Map2, >10_2; expected: Map2, >10_2
-		// Map2, =10; expected: Map2, 10
-		// Map2, <10_1; expected: Map2, 10
-		// Map2, <10_2; expected: Map2, 10
-		charMap = CharMap.getSimpleUnicodeCharSet();
-		for (int i = Integer.MIN_VALUE; i <= Integer.MAX_VALUE; i++) {
-			ctrl = new Controller(charMap, i);
-			if (i < 10) {
-				assertEquals(i, ctrl.getWidth());
-				assertEquals(charMap, ctrl.getCharMap());
-			}
-		}
+		for (CharMap charMap : charMaps) {
+			for (int testWidth : testValues) {
+				// if charMap is null: test if NullPointerException is thrown on
+				// instantiation of Controller
+				if (charMap == null) {
+					npeCatched = false;
+					try {
+						ctrl = new Controller(charMap, testWidth);
+					} catch (NullPointerException e) {
+						npeCatched = true;
+					}
+					assertTrue(npeCatched);
+				} else { // If charMap is not null: test if values are set
+							// correctly
+					ctrl = new Controller(charMap, testWidth);
+					assertEquals(DEFAULT_PADDING_LEFT, ctrl.getPaddingLeft());
+					assertEquals(DEFAULT_PADDING_RIGHT, ctrl.getPaddingRight());
+					if (testWidth < Controller.MIN_WIDTH) {
+						assertEquals(Controller.MIN_WIDTH, ctrl.getWidth());
+						assertEquals(charMap, ctrl.getCharMap());
+					} else {
+						assertEquals(testWidth, ctrl.getWidth());
+						assertEquals(charMap, ctrl.getCharMap());
+					}
+				}
 
-		// MapNull, >10_1; expected: NullPointerException
-		// MapNull, >10_2; expected: NullPointerException
-		// MapNull, =10; expected: NullPointerException
-		// MapNull, <10_1; expected: NullPointerException
-		// MapNull, <10_2; expected: NullPointerException
-		charMap = null;
-		for (int i = Integer.MIN_VALUE; i <= Integer.MAX_VALUE; i++) {
-			ctrl = new Controller(charMap, i);
-			boolean npeCatched = false;
-			try {
-				ctrl = new Controller(charMap);
-			} catch (NullPointerException e) {
-				npeCatched = true;
 			}
-			assertTrue(npeCatched);
 		}
 	}
 
