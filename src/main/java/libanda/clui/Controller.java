@@ -15,8 +15,7 @@ public class Controller {
 	private int width;
 
 	/**
-	 * Intended behavior:<br />
-	 * Create new instance of Controller with default values for width,
+	 * Creates new instance of Controller with default values for width,
 	 * padding-left, padding-right and the default CharMap specified in private
 	 * constants
 	 */
@@ -27,8 +26,7 @@ public class Controller {
 	}
 
 	/**
-	 * Intended behavior:<br />
-	 * Create new instance of Controller with default values for width,
+	 * Creates new instance of Controller with default values for width,
 	 * padding-left and padding-right specified in private constants. Use the
 	 * specified CharMap.
 	 * 
@@ -44,8 +42,7 @@ public class Controller {
 	}
 
 	/**
-	 * Intended behavior:<br />
-	 * Create new instance of Controller with default values for padding-left,
+	 * Creates new instance of Controller with default values for padding-left,
 	 * padding-right and the default CharMap specified in private constants. Use
 	 * the specified width.<br />
 	 * Clamps the passed width to range [10 .. INT_MAX]
@@ -60,8 +57,7 @@ public class Controller {
 	}
 
 	/**
-	 * Intended behavior:<br />
-	 * Create new instance of Controller with default values for padding-left
+	 * Creates new instance of Controller with default values for padding-left
 	 * and padding-right specified in private constants. Use the specified width
 	 * and CharMap.<br />
 	 * Clamps the passed width to range [10 .. INT_MAX]
@@ -80,8 +76,7 @@ public class Controller {
 	}
 
 	/**
-	 * Intended behavior:<br />
-	 * Set the width which will be used to draw all components.<br />
+	 * Sets the width which will be used to draw all components.<br />
 	 * Clamps the passed width to range [10 .. INT_MAX]
 	 * 
 	 * @param width
@@ -94,7 +89,6 @@ public class Controller {
 	}
 
 	/**
-	 * Intended behavior:<br />
 	 * Returns the width which will be used to draw all components
 	 * 
 	 * @return The width which will be used to draw all components
@@ -104,8 +98,7 @@ public class Controller {
 	}
 
 	/**
-	 * Intended behavior:<br />
-	 * Set the CharMap which will be used to draw all components.
+	 * Sets the CharMap which will be used to draw all components.
 	 * 
 	 * @param charMap
 	 *            - The CharMap which will be used to draw all components
@@ -119,7 +112,6 @@ public class Controller {
 	}
 
 	/**
-	 * Intended behavior:<br />
 	 * Returns the CharMap which will be used to draw all components.
 	 * 
 	 * @return The CharMap which will be used to draw all components.
@@ -129,8 +121,7 @@ public class Controller {
 	}
 
 	/**
-	 * Intended behavior:<br />
-	 * Set the padding width for the specified PaddingPosition(s).<br />
+	 * Sets the padding width for the specified PaddingPosition(s).<br />
 	 * Clamps the passed padding width to range [0 .. INT_MAX]
 	 * 
 	 * @param position
@@ -152,7 +143,6 @@ public class Controller {
 	}
 
 	/**
-	 * Intended behavior:<br />
 	 * Returns the padding on the right which is used to draw all components.
 	 * 
 	 * @return The padding on the right which is used to draw all components.
@@ -162,7 +152,6 @@ public class Controller {
 	}
 
 	/**
-	 * Intended behavior:<br />
 	 * Returns the padding on the left which is used to draw all components.
 	 * 
 	 * @return The padding on the left which is used to draw all components.
@@ -172,7 +161,6 @@ public class Controller {
 	}
 
 	/**
-	 * Intended behavior:<br />
 	 * Clears all paddings specified by the passed PaddingPosition (sets them to
 	 * 0)
 	 * 
